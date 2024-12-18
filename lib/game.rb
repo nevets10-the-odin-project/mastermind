@@ -1,5 +1,5 @@
 class Game
-  attr_accessor :code, :current_turn
+  attr_accessor :code, :current_turn, :board
 
   MAX_TURNS = 12
   COLOR_ARRAY = %w[R O Y G B P]
@@ -7,11 +7,18 @@ class Game
   def initialize
     self.code = []
     self.current_turn = 1
+    self.board = init_board
+  end
+
+  def init_board
+    row = Array.new(6, 'X')
+    Array.new(12, row)
   end
 
   def start_game
     self.code = []
     self.current_turn = 1
+    self.board = init_board
     generate_code
 
     p code
