@@ -1,6 +1,7 @@
 class Game
   attr_accessor :code, :current_turn, :board, :win
 
+  CODE_LENGTH = 4
   MAX_TURNS = 12
   COLOR_ARRAY = %w[R O Y G B P]
 
@@ -12,7 +13,7 @@ class Game
   end
 
   def init_board
-    row = Array.new(6, 'X')
+    row = Array.new(CODE_LENGTH, 'X')
     Array.new(12, row)
   end
 
@@ -21,7 +22,7 @@ class Game
     self.current_turn = 1
     self.board = init_board
 
-    p code
+    # p code
     start_turn while current_turn <= MAX_TURNS && !win
     end_game
   end
@@ -30,7 +31,7 @@ class Game
     rng = Random.new
     new_code = []
 
-    4.times do
+    CODE_LENGTH.times do
       new_code << COLOR_ARRAY[rng.rand(0..5)]
     end
 
@@ -42,10 +43,15 @@ class Game
   end
 
   def start_turn
+    print_board
     puts "Turn #{current_turn} of 12"
     puts "What's the code?"
+
     guess = gets.chomp.upcase.split
+
     give_feedback(guess)
+    update_board(guess)
+
     self.win = correct_code?(guess)
     self.current_turn += 1
   end
@@ -80,5 +86,15 @@ class Game
 
     puts "#{correct} correctly placed."
     puts "#{almost} correct colors."
+  end
+
+  def update_board(guess)
+    board[current_turn - 1] = guess
+  end
+
+  def print_board
+    board.reverse.each do |row|
+      p row
+    end
   end
 end
