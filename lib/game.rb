@@ -23,6 +23,7 @@ class Game
 
     p code
     start_turn while current_turn <= MAX_TURNS && !win
+    end_game
   end
 
   def generate_code
@@ -45,5 +46,10 @@ class Game
     puts "What's the code?"
     self.win = correct_code?(gets.chomp)
     self.current_turn += 1
+  end
+
+  def end_game
+    result = win ? 'Won!' : 'Lost.'
+    puts "You #{result}"
   end
 end
