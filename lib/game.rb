@@ -16,10 +16,9 @@ class Game
   end
 
   def start_game
-    self.code = []
+    self.code = generate_code
     self.current_turn = 1
     self.board = init_board
-    generate_code
 
     p code
     start_turn while current_turn <= MAX_TURNS
@@ -27,11 +26,13 @@ class Game
 
   def generate_code
     rng = Random.new
-    self.code = []
+    new_code = []
 
     6.times do
-      code << COLOR_ARRAY[rng.rand(0..5)]
+      new_code << COLOR_ARRAY[rng.rand(0..5)]
     end
+
+    new_code
   end
 
   def correct_code?(guess)
