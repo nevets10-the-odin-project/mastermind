@@ -30,7 +30,7 @@ class Game
     rng = Random.new
     new_code = []
 
-    6.times do
+    4.times do
       new_code << COLOR_ARRAY[rng.rand(0..5)]
     end
 
