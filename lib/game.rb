@@ -56,15 +56,26 @@ class Game
   end
 
   def give_feedback(guess)
-    correct_indexes = []
+    filtered_guess = []
+    filtered_code = []
     correct = 0
     almost = 0
 
     guess.each_with_index do |v, i|
       if code[i] == v
-        correct_indexes << i
+        filtered_guess << nil
+        filtered_code << nil
         correct += 1
+      else
+        filtered_guess << v
+        filtered_code << code[i]
       end
+    end
+
+    filtered_guess.each do |v|
+      next if v.nil?
+
+      almost += 1 if filtered_code.include?(v)
     end
 
     puts "#{correct} correctly placed."
