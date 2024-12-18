@@ -6,6 +6,7 @@ class Game
 
   def initialize
     self.code = []
+    self.current_turn = 0
   end
 
   def start
@@ -19,7 +20,10 @@ class Game
     6.times do
       code << COLOR_ARRAY[rng.rand(0..5)]
     end
+  end
 
-    p code
+  def correct_code?(guess)
+    self.current_turn += 1
+    code == guess.upcase.split
   end
 end
