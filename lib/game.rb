@@ -26,4 +26,9 @@ class Game
     self.current_turn += 1
     code == guess.upcase.split
   end
+
+  def start_turn
+    puts "What's the code?"
+    puts correct_code?(gets.chomp)
+  end
 end
