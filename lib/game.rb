@@ -38,18 +38,36 @@ class Game
   end
 
   def correct_code?(guess)
-    code == guess.upcase.split
+    code == guess
   end
 
   def start_turn
     puts "Turn #{current_turn} of 12"
     puts "What's the code?"
-    self.win = correct_code?(gets.chomp)
+    guess = gets.chomp.upcase.split
+    give_feedback(guess)
+    self.win = correct_code?(guess)
     self.current_turn += 1
   end
 
   def end_game
     result = win ? 'Won!' : 'Lost.'
     puts "You #{result}"
+  end
+
+  def give_feedback(guess)
+    correct_indexes = []
+    correct = 0
+    almost = 0
+
+    guess.each_with_index do |v, i|
+      if code[i] == v
+        correct_indexes << i
+        correct += 1
+      end
+    end
+
+    puts "#{correct} correctly placed."
+    puts "#{almost} correct colors."
   end
 end
