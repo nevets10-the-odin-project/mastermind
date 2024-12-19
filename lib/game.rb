@@ -13,8 +13,19 @@ class Game
   end
 
   def init_board
-    row = Array.new(CODE_LENGTH, 'X')
-    Array.new(12, row)
+    new_board = []
+
+    MAX_TURNS.times do |i|
+      new_board[i] = {}
+    end
+
+    new_board.each do |row|
+      row[:guess] = Array.new(CODE_LENGTH, 'X')
+      row[:correct] = 0
+      row[:almost] = 0
+    end
+
+    new_board
   end
 
   def start_game
@@ -48,8 +59,6 @@ class Game
     puts "What's the code?"
 
     guess = gets.chomp.upcase.split
-
-    give_feedback(guess)
     update_board(guess)
 
     self.win = correct_code?(guess)
@@ -84,17 +93,17 @@ class Game
       almost += 1 if filtered_code.include?(v)
     end
 
-    puts "#{correct} correctly placed."
-    puts "#{almost} correct colors."
+    { correct: correct, almost: almost }
   end
 
   def update_board(guess)
-    board[current_turn - 1] = guess
+    board[current_turn - 1][:guess] = guess
   end
 
   def print_board
     board.reverse.each do |row|
-      p row
+      print "#{row[:guess]} #{row[:correct]} #{row[:almost]}"
+      puts ''
     end
   end
 end
