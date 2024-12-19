@@ -1,4 +1,5 @@
 class Game
+  require 'colorize'
   attr_accessor :code, :current_turn, :board, :win
 
   CODE_LENGTH = 4
@@ -105,7 +106,11 @@ class Game
 
   def print_board
     board.reverse.each do |row|
-      print "#{row[:guess]} #{row[:correct]} #{row[:almost]}"
+      print row[:guess]
+      print ' '
+      print "#{row[:correct]}".colorize(:red)
+      print ' '
+      print row[:almost]
       puts ''
     end
   end
