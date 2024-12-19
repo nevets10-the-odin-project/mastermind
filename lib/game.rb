@@ -57,7 +57,8 @@ class Game
   def start_turn
     print_board
     puts "Turn #{current_turn} of 12"
-    puts "What's the code?"
+    puts "What's the #{CODE_LENGTH} digit code?"
+    puts "Put a space between each character. Options are #{COLOR_ARRAY}."
 
     guess = gets.chomp.upcase.split
     update_board(guess)
