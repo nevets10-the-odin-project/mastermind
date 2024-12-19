@@ -5,6 +5,12 @@
 
 ---
 
+## Post-project Review
+
+For the interest of time, I want to move forward with the course. The base game works in accordance to the rules of Mastermind.
+
+---
+
 ## Brainstorming
 
 Classes
