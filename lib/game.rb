@@ -97,7 +97,10 @@ class Game
   end
 
   def update_board(guess)
+    hint = give_feedback(guess)
     board[current_turn - 1][:guess] = guess
+    board[current_turn - 1][:correct] = hint[:correct]
+    board[current_turn - 1][:almost] = hint[:almost]
   end
 
   def print_board
